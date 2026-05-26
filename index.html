@@ -877,10 +877,17 @@
 
     .footer-logos {
       display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin-top: 1.2rem;
+    }
+
+    .footer-logos-row {
+      display: flex;
       align-items: center;
       gap: 1rem;
       flex-wrap: wrap;
-      margin-top: 1.2rem;
     }
 
     .logo-chip {
@@ -1189,7 +1196,7 @@
         contact: "REGISTRATION_FORM_LINK_HERE",                // ← UPDATE with your form URL
         website: "aston.ac.uk",                           // ← UPDATE
         registrationLink: "",                                       // ← UPDATE (leave blank if not ready)
-        description: "A one-day academic workshop bringing together researchers and practitioners to explore trustworthy, fair, and safe AI in real-world healthcare settings.",
+        description: "This workshop brings together researchers and practitioners to explore trustworthy, fair, and safe AI in real-world healthcare settings.",
       },
 
       /* ── Organising Institutions ───────────────────────────────── */
@@ -1215,8 +1222,8 @@
         {
           name: "Prof. Faisal Shafait",
           org: "NUST, Pakistan",
-          topic: "NeuroTransformer",
-          bio: "Professor at NUST with expertise in deep learning and medical image analysis. His talk introduces NeuroTransformer, a transformer-based architecture designed for neurological applications.",
+          topic: "Neurotransformer: Purpose-built Transformer Models for Analysis of EEG Data (tentative)",
+          bio: "Faisal is a Professor at NUST with expertise in deep learning and medical image analysis. His talk introduces NeuroTransformer, a transformer-based architecture designed for neurological applications.",
           photo: "speakers/dr faisal shafait.jpeg",
         },
         {
@@ -1244,21 +1251,21 @@
           name: "Dr. Hassan Aqeel Khan",
           org: "Aston University",
           topic: "Welcome & Introduction to Project NeuReader",
-          bio: "Researcher at Aston University specialising in healthcare AI and neural signal analysis. He leads Project NeuReader, exploring AI-driven tools for neurological assessment and clinical decision support.",
+          bio: "Hassan is a Senior Lecturer at Aston University specialising in healthcare AI and neural signal analysis. He is leading Project NeuReader, exploring AI-driven tools for neurological assessment and clinical decision support.",
           photo: "speakers/Hassan Khan.jpg",
         },
         {
           name: "Dr. Naseer Bajwa",
           org: "NUST, Pakistan",
           topic: "Explainable AI in Healthcare",
-          bio: "Assistant Professor at NUST specialising in interpretable machine learning for clinical decision support. His session explores how explainable AI can build trust and accountability in healthcare systems.",
+          bio: "Naseer is a researcher at NUST specialising in interpretable machine learning for clinical decision support. His session explores how explainable AI can build trust and accountability in healthcare systems.",
           photo: "speakers/dr naseer bajwa.jpg",
         },
         {
           name: "Dr. Momina Moetesum",
           org: "NUST, Pakistan",
-          topic: "Agentic AI in Healthcare",
-          bio: "HoD Software Engineering at NUST working on autonomous AI systems for healthcare applications. Her session explores the emerging frontier of agentic AI — systems that can plan, reason, and act in clinical environments.",
+          topic: "Generating Evidence-Grounded Clinical Reports for EEG Data using Agentic-AI (tentative)",
+          bio: "Momina is an Assistant Professor at NUST working on autonomous AI systems for healthcare applications. Her session explores the emerging frontier of agentic AI — systems that can plan, reason, and act in clinical environments.",
           photo: "speakers/dr momina moetesum.jpeg",
         },
       ],
@@ -1273,7 +1280,7 @@
       */
       agenda: [
         { time: "09:30 – 09:45", title: "Welcome & Introduction to Project NeuReader", speaker: "Dr. Hassan Aqeel Khan", type: "session" },
-        { time: "09:45 – 10:15", title: "NeuroTransformer", speaker: "Dr. Faisal Shafait", type: "session" },
+        { time: "09:45 – 10:15", title: "Neurotransformer: Purpose-built Transformer Models for Analysis of EEG Data (tentative)", speaker: "Dr. Faisal Shafait", type: "session" },
         { time: "10:15 – 10:45", title: "Explainable AI in Healthcare", speaker: "Dr. Naseer Bajwa", type: "session" },
         { time: "10:45 – 11:15", title: "TBA", speaker: "Guest Speaker (TBC)", type: "session" },
         { time: "11:15 – 11:30", title: "Tea Break & Networking", speaker: "", type: "break" },
@@ -1282,11 +1289,11 @@
         { time: "12:30 – 13:30", title: "Lunch Break", speaker: "", type: "break" },
         { time: "13:30 – 14:30", title: "Decision-Making Under Constraints: Fairness, Fatigue, and Information in AI Systems", speaker: "Prof. Gustavo Carneiro", type: "session" },
         { time: "14:30 – 15:00", title: "From Sensor to Action: Investigating Proactive Care for Ageing-in-Place", speaker: "Marina Vicini", type: "session" },
-        { time: "15:00 – 15:30", title: "Agentic AI in Healthcare", speaker: "Dr. Momina Moetesum", type: "session" },
+        { time: "15:00 – 15:30", title: "Generating Evidence-Grounded Clinical Reports for EEG Data using Agentic-AI (tentative)", speaker: "Dr. Momina Moetesum", type: "session" },
         { time: "15:30 – 15:45", title: "Tea Break & Networking", speaker: "", type: "break" },
         { time: "15:45 – 16:30", title: "Panel Discussion & Open Q&A", speaker: "All Speakers", type: "panel" },
         { time: "16:30 – 16:40", title: "Closing Remarks", speaker: "", type: "session" },
-        { time: "16:40 – 16:45", title: "Group Photo", speaker: "All Attendees", type: "social" },
+        /*{ time: "16:40 – 16:45", title: "Group Photo", speaker: "All Attendees", type: "social" },*/
       ],
 
     };
@@ -1322,18 +1329,29 @@
     <div class="hero-meta-item"><span class="meta-label">Seats</span><span class="meta-value">Limited — Reserve Now</span></div>
   `;
       document.getElementById('hero-logos').innerHTML =
+        `<div style="display:flex;flex-direction:column;gap:0.75rem;">` +
+        `<div style="display:flex;align-items:center;gap:1.8rem;flex-wrap:wrap;">` +
         `<span style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.45);margin-right:0.5rem">Hosted by</span>` +
         CONFIG.organisers.map(o => o.logo
           ? `<img src="${o.logo}" alt="${o.name}" style="height:32px;max-width:100px;object-fit:contain;opacity:0.85">`
           : `<span style="color:rgba(255,255,255,0.6);font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:0.08em">${o.short}</span>`
-        ).join('');
+        ).join('') +
+        `</div>` +
+        `<div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">` +
+        `<span style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.45)">Funded by</span>` +
+        `<img src="EPSRC_logo_W.png" alt="EPSRC" style="height:40px;width:auto;object-fit:contain;opacity:0.85">` +
+        `</div>` +
+        `</div>`;
     }
 
     function renderAbout() {
       document.getElementById('about-body').innerHTML = `
     <p>${CONFIG.event.description}</p>
-    <p>Sessions span the full spectrum of trustworthy AI in healthcare — from neural signal analysis and explainable algorithms to proactive ageing care and real-world governance frameworks. The day includes keynote talks, an industry session, a panel discussion, and open networking.</p>
-    <p>Organised by Aston University Birmingham, in collaboration with NUST Pakistan.</p>
+	<p>Learn about the latest research outcomes of the <a href="https://dll.seecs.nust.edu.pk/neureader/"><strong>Neureader</strong></a> project where we are developing explainable-AI models that can summarise EEG data using AI agents. The objective of this project is 
+	 to help improve neurological care available to patients in low and middle-income countries (LMICS).</p>
+    <p>Sessions cover current research problems related to trustworthy AI in healthcare — from neural signal analysis and explainable algorithms to proactive ageing care and real-world governance frameworks. The day includes keynote talks, a panel discussion, and open networking.
+	Speakers include academics, clinicians, and industry professionals working at the cutting edge of healthcare AI.</p>
+    <p>Organised by Aston University Birmingham, in collaboration with NUST Pakistan. This workshop is supported by the Engineering and Physical Sciences Research Council, UK [grant number EP/Y002865/1]</p>
   `;
       document.getElementById('about-stats').innerHTML = `
     <div class="stat-card"><div class="stat-number">8</div><div class="stat-desc">Expert Speakers</div></div>
@@ -1395,7 +1413,7 @@
     function renderRegister() {
       const e = CONFIG.event;
       document.getElementById('register-body').textContent =
-        'Seats are limited. To attend, please request an invitation — places will be confirmed upon receipt.';
+        'Seats need to be reserved in advance.';
       document.getElementById('register-chips').innerHTML = `
     <span class="chip">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -1414,17 +1432,22 @@
       document.getElementById('register-cta').innerHTML = e.contact && e.contact !== "REGISTRATION_FORM_LINK_HERE"
         ? `<a href="${e.contact}" target="_blank" class="btn btn-primary" style="font-size:1.1rem;padding:1rem 2.5rem">Reserve Your Seat</a>
        <p style="margin-top:1rem;font-size:0.85rem;color:#5A5A7A">Interested in attending? Please fill in the form to request an invitation. Seats are limited.</p>`
-        : `<p style="font-size:1rem;color:#1A1A2E;margin-bottom:0.5rem">Interested in attending? Please contact <strong>Dr Hassan Aqeel Khan</strong> to request an invitation. <span style="color:#6B1B6E;font-weight:600">Seats are limited.</span></p>`;
+        : `<p style="font-size:1rem;color:#1A1A2E;margin-bottom:0.5rem">Interested in attending? Get your ticket at <a href="https://www.eventbrite.co.uk/e/workshop-on-trutworthy-healthcare-ai-tickets-1990272772439"><strong>Eventbrite.</strong></a>`;
     }
 
     function renderFooter() {
       const e = CONFIG.event;
       document.getElementById('footer-tagline').textContent = `${e.date} · ${e.venue}`;
       document.getElementById('footer-logos').innerHTML =
+        `<div class="footer-logos-row">` +
         CONFIG.organisers.map(o => o.logo
           ? `<img src="${o.logo}" alt="${o.name}" style="height:38px;max-width:110px;object-fit:contain;opacity:0.9">`
           : `<span class="logo-chip">${o.short}</span>`
-        ).join('');
+        ).join('') +
+        `</div>` +
+        `<div style="display:flex;align-items:center;gap:0.95rem;">` +        
+        `<img src="EPSRC_logo_W.png" alt="EPSRC" style="height:40px;width:auto;object-fit:contain;opacity:0.9">` +
+        `</div>`;
       document.getElementById('footer-contact').innerHTML = `
     <li>Contact: Dr Hassan Aqeel Khan</li>
     <li><a href="https://research.aston.ac.uk/en/persons/hassan-aqeel-khan/">Dr Hassan Aqeel Khan</a></li>
